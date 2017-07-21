@@ -624,12 +624,12 @@ webpackJsonp([0], [function (t, e) {
         }, components: {VLoading: s.default, VGitment: a.default}, methods: {
             axiosDate: function () {
                 var t = this;
-                window.scrollTo(0, 0), this.loading = !0, u.default.get("https://api.github.com/repos/tinyallen/tinyallen.github.io/issues/1").then(function (e) {
+                window.scrollTo(0, 0), this.loading = !0, u.default.get("https://api.github.com/repos/xiaodeyu0204/xiaodeyu0204.github.io/issues/2").then(function (e) {
                     t.data = e.data, t.row = e.data.body, t.option = {
                         time: t.data.created_at,
                         title: t.data.title,
-                        owner: "tinyallen",
-                        repo: "tinyallen.github.io",
+                        owner: "xiaodeyu0204",
+                        repo: "xiaodeyu0204.github.io",
                         oauth: {
                             client_id: "58ed27b34ea65650dd61",
                             client_secret: "9bf4cc15ba562d627e9ed939e31ec4ef5680010a"
@@ -741,12 +741,12 @@ webpackJsonp([0], [function (t, e) {
         }, components: {VLoading: s.default, VGitment: a.default}, methods: {
             axiosDate: function () {
                 var t = this;
-                window.scrollTo(0, 0), this.loading = !0, u.default.get("https://api.github.com/repos/tinyallen/tinyallen.github.io/issues/2").then(function (e) {
+                window.scrollTo(0, 0), this.loading = !0, u.default.get("https://api.github.com/repos/xiaodeyu0204/xiaodeyu0204.github.io/issues/1").then(function (e) {
                     t.data = e.data, t.row = e.data.body, t.option = {
                         time: t.data.created_at,
                         title: t.data.title,
-                        owner: "tinyallen",
-                        repo: "tinyallen.github.io",
+                        owner: "xiaodeyu0204",
+                        repo: "xiaodeyu0204.github.io",
                         oauth: {
                             client_id: "58ed27b34ea65650dd61",
                             client_secret: "9bf4cc15ba562d627e9ed939e31ec4ef5680010a"
@@ -888,7 +888,7 @@ webpackJsonp([0], [function (t, e) {
     t.exports = {
         render: function () {
             var t = this, e = t.$createElement, r = t._self._c || e;
-            return r("Footer", {staticClass: "footer container auto tc"}, [r("div", {staticClass: " footer-border  pt32 pb32"}, [r("p", {staticClass: "mb24"}, [t._v("  © 2017 Allen's Blog , Made with "), r("span", {staticClass: "cred"}, [t._v("❤")]), t._v(" by "), r("a", {staticClass: "b"}, [t._v("Allen")])]), t._v(" "), r("div", [r("img", {
+            return r("Footer", {staticClass: "footer container auto tc"}, [r("div", {staticClass: " footer-border  pt32 pb32"}, [r("p", {staticClass: "mb24"}, [t._v("  © 2017 xiaodeyu's Blog , Made with "), r("span", {staticClass: "cred"}, [t._v("❤")]), t._v(" by "), r("a", {staticClass: "b"}, [t._v("xiaodeyu")])]), t._v(" "), r("div", [r("img", {
                 attrs: {
                     width: "54",
                     src: n(77)
