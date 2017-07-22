@@ -659,11 +659,11 @@ webpackJsonp([0], [function (t, e) {
         }, components: {VLoading: s.default, VInfo: u.default, VGitment: a.default}, methods: {
             axiosDate: function () {
                 var t = this;
-                window.scrollTo(0, 0), this.loading = !0, d.default.get("https://api.github.com/repos/tinyallen/blog/issues/" + this.$route.params.id).then(function (e) {
+                window.scrollTo(0, 0), this.loading = !0, d.default.get("https://api.github.com/repos/xiaodeyu0204/blog/issues/" + this.$route.params.id).then(function (e) {
                     t.data = e.data, t.row = e.data.body, t.option = {
                         time: t.data.created_at,
                         title: t.data.title,
-                        owner: "tinyallen",
+                        owner: "xiaodeyu0204",
                         repo: "blog",
                         oauth: {
                             client_id: "58ed27b34ea65650dd61",
@@ -696,7 +696,7 @@ webpackJsonp([0], [function (t, e) {
                 this.page++, this.axiosDate(this.page)
             }, axiosDate: function (t) {
                 var e = this;
-                this.loading = !0, u.default.get("https://api.github.com/repos/tinyallen/blog/issues?filter=created&page=" + t + "&per_page=7").then(function (t) {
+                this.loading = !0, u.default.get("https://api.github.com/repos/xiaodeyu0204/blog/issues?filter=created&page=" + t + "&per_page=7").then(function (t) {
                     e.loading = !1, Array.prototype.push.apply(e.items, t.data)
                 })
             }
