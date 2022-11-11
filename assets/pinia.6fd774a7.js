@@ -1,1 +1,0 @@
-import{m as r}from"./index.70a3808d.js";const s=r("Public",{state:()=>({userMsg:"token",selectVideo:{imagekey:"",imagevideo:"",imageurl:""},searchkey:""}),getters:{getUserMsg:e=>e.userMsg}});export{s as P};
