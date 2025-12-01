@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -12,4 +12,508 @@
     <div id="app"></div>
     
   </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025-2026雪季价格计算器</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        #app {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .container {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .input-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group:last-child {
+            margin-bottom: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        input[type="date"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e4e8;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="date"]:focus,
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .rules-section {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 4px solid #ffc107;
+        }
+
+        .rules-section h2 {
+            color: #856404;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .rule-item {
+            margin-bottom: 12px;
+            color: #856404;
+            line-height: 1.6;
+        }
+
+        .rule-item strong {
+            color: #000;
+        }
+
+        .result-section {
+            background: #e7f3ff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196F3;
+        }
+
+        .result-section h2 {
+            color: #0c5ba0;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .calculation-details {
+            margin-top: 15px;
+        }
+
+        .night-detail {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 3px solid #667eea;
+        }
+
+        .night-detail h4 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .night-detail p {
+            color: #666;
+            font-size: 14px;
+            margin: 4px 0;
+        }
+
+        .price-line {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .price-line:last-child {
+            border-bottom: none;
+            font-weight: bold;
+            font-size: 16px;
+            color: #667eea;
+            margin-top: 10px;
+            padding-top: 15px;
+            border-top: 2px solid #667eea;
+        }
+
+        .total-price {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #dc3545;
+        }
+
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #17a2b8;
+        }
+
+        .day-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+
+        .weekend-tag {
+            background: #ff9800;
+            color: white;
+        }
+
+        .weekday-tag {
+            background: #4caf50;
+            color: white;
+        }
+
+        .holiday-tag {
+            background: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>2025-2026雪季价格计算器</h1>
+            <p class="subtitle">选择入住和退房日期，自动计算价格</p>
+
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="checkin">入住日期：</label>
+                    <input type="date" id="checkin" v-model="checkinDate"
+                           min="2024-11-20" max="2026-03-31">
+                </div>
+
+                <div class="input-group">
+                    <label for="checkout">退房日期：</label>
+                    <input type="date" id="checkout" v-model="checkoutDate"
+                           :min="minCheckoutDate" max="2026-04-01">
+                    <p v-if="checkinDate && checkoutDate && nights > 0"
+                       style="margin-top: 8px; color: #666; font-size: 14px;">
+                        共入住 {{ nights }} 晚
+                    </p>
+                </div>
+            </div>
+
+            <div class="rules-section">
+                <h2>计价规则说明</h2>
+                <div class="rule-item">
+                    <strong>计算方式：</strong>例如12月1日入住，12月4日退房，实际住了3晚（1日、2日、3日晚上），4日退房不计费
+                </div>
+                <div class="rule-item">
+                    <strong>基础价格：</strong>1晚599元，2晚1198元，3晚1797元
+                </div>
+                <div class="rule-item">
+                    <strong>平日定义：</strong>周日、周一、周二、周三、周四入住
+                </div>
+                <div class="rule-item">
+                    <strong>周末定义：</strong>周五、周六入住
+                </div>
+                <div class="rule-item">
+                    <strong>初雪期：</strong>11月20日-11月26日、3月16日-3月22日
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;平日每晚+100元，周末每晚+300元
+                </div>
+                <div class="rule-item">
+                    <strong>春雪期：</strong>11月27日-12月10日、3月1日-3月15日
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;平日每晚+350元，周末每晚+600元
+                </div>
+                <div class="rule-item">
+                    <strong>冬雪旺季：</strong>12月11日-2月28日
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;平日每晚+600元，周末每晚+900元
+                </div>
+                <div class="rule-item">
+                    <strong>节假日：</strong>圣诞节（12/24-12/26）、元旦（12/31-1/2）、春节（2/17-2/23）
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;每晚+1200元
+                </div>
+                <div class="rule-item">
+                    <strong>计算优先级：</strong>节假日 > 冬雪旺季 > 春雪期 > 初雪期 > 普通日期
+                </div>
+            </div>
+
+            <div v-if="error" class="error">
+                {{ error }}
+            </div>
+
+            <div v-if="!error && checkinDate && nights > 0" class="result-section">
+                <h2>价格明细</h2>
+
+                <div class="price-line">
+                    <span>基础价格（{{ nights }}晚）：</span>
+                    <span>¥{{ basePrice }}</span>
+                </div>
+
+                <div class="calculation-details">
+                    <h3 style="margin-bottom: 15px; color: #333; font-size: 16px;">每晚加价明细：</h3>
+                    <div v-for="(night, index) in nightDetails" :key="index" class="night-detail">
+                        <h4>
+                            第{{ index + 1 }}晚：{{ night.date }} ({{ night.weekdayName }})
+                            <span v-if="night.isHoliday" class="day-tag holiday-tag">节假日</span>
+                            <span v-else-if="night.isWeekend" class="day-tag weekend-tag">周末</span>
+                            <span v-else class="day-tag weekday-tag">平日</span>
+                        </h4>
+                        <p v-if="night.period">时期：{{ night.period }}</p>
+                        <p v-if="night.holidayName">假期：{{ night.holidayName }}</p>
+                        <p style="color: #667eea; font-weight: bold;">加价：¥{{ night.surcharge }}</p>
+                    </div>
+                </div>
+
+                <div class="price-line">
+                    <span>总加价：</span>
+                    <span>¥{{ totalSurcharge }}</span>
+                </div>
+
+                <div class="price-line">
+                    <span>最终报价：</span>
+                    <span>¥{{ totalPrice }}</span>
+                </div>
+            </div>
+
+            <div v-if="!error && checkinDate && nights > 0" class="total-price">
+                总计：¥{{ totalPrice }}
+            </div>
+
+            <div v-if="!checkinDate || !checkoutDate" class="info">
+                请选择入住日期和退房日期以查看价格
+            </div>
+            <div v-else-if="checkinDate && checkoutDate && nights === 0" class="info">
+                入住和退房为同一天，无住宿费用
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    checkinDate: '',
+                    checkoutDate: ''
+                };
+            },
+            computed: {
+                minCheckoutDate() {
+                    if (!this.checkinDate) return '2024-11-21';
+
+                    const checkin = new Date(this.checkinDate + 'T00:00:00');
+                    checkin.setDate(checkin.getDate() + 1);
+
+                    const year = checkin.getFullYear();
+                    const month = String(checkin.getMonth() + 1).padStart(2, '0');
+                    const day = String(checkin.getDate()).padStart(2, '0');
+
+                    return `${year}-${month}-${day}`;
+                },
+
+                nights() {
+                    if (!this.checkinDate || !this.checkoutDate) return 0;
+
+                    const checkin = new Date(this.checkinDate + 'T00:00:00');
+                    const checkout = new Date(this.checkoutDate + 'T00:00:00');
+
+                    // 计算天数差
+                    const diffTime = checkout - checkin;
+                    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+                    return diffDays > 0 ? diffDays : 0;
+                },
+
+                error() {
+                    if (!this.checkinDate || !this.checkoutDate) return '';
+
+                    if (this.nights < 0) {
+                        return '退房日期不能早于入住日期';
+                    }
+
+                    return '';
+                },
+
+                basePrice() {
+                    // 基础价格：599元/晚
+                    return this.nights * 599;
+                },
+
+                nightDetails() {
+                    if (!this.checkinDate || this.nights < 1) return [];
+
+                    const details = [];
+                    const checkin = new Date(this.checkinDate + 'T00:00:00');
+
+                    for (let i = 0; i < this.nights; i++) {
+                        const currentDate = new Date(checkin);
+                        currentDate.setDate(checkin.getDate() + i);
+
+                        const detail = this.calculateNightDetail(currentDate);
+                        details.push(detail);
+                    }
+
+                    return details;
+                },
+
+                totalSurcharge() {
+                    return this.nightDetails.reduce((sum, night) => sum + night.surcharge, 0);
+                },
+
+                totalPrice() {
+                    return this.basePrice + this.totalSurcharge;
+                }
+            },
+            methods: {
+                calculateNightDetail(date) {
+                    const year = date.getFullYear();
+                    const month = date.getMonth() + 1; // 0-11 -> 1-12
+                    const day = date.getDate();
+                    const weekday = date.getDay(); // 0=周日, 1=周一, ..., 6=周六
+
+                    const weekdayNames = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+                    const weekdayName = weekdayNames[weekday];
+
+                    // 判断是否为周末（周五=5，周六=6）
+                    const isWeekend = weekday === 5 || weekday === 6;
+
+                    // 格式化日期
+                    const dateStr = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+
+                    let surcharge = 0;
+                    let period = '';
+                    let holidayName = '';
+                    let isHoliday = false;
+
+                    // 1. 优先判断节假日（优先级最高）
+                    // 圣诞节：12月24日-12月26日
+                    if ((year === 2025 || year === 2024) && month === 12 && day >= 24 && day <= 26) {
+                        surcharge = 1200;
+                        holidayName = '圣诞节';
+                        isHoliday = true;
+                    }
+                    // 元旦：12月31日-1月2日
+                    else if (
+                        ((year === 2025 || year === 2024) && month === 12 && day === 31) ||
+                        ((year === 2026 || year === 2025) && month === 1 && day <= 2)
+                    ) {
+                        surcharge = 1200;
+                        holidayName = '元旦';
+                        isHoliday = true;
+                    }
+                    // 春节：2月17日-2月23日
+                    else if ((year === 2026 || year === 2025) && month === 2 && day >= 17 && day <= 23) {
+                        surcharge = 1200;
+                        holidayName = '春节';
+                        isHoliday = true;
+                    }
+                    // 2. 冬雪旺季（优先级第二）
+                    // 12月11日-2月28日
+                    else if (
+                        ((year === 2025 || year === 2024) && month === 12 && day >= 11) ||
+                        ((year === 2026 || year === 2025) && month === 1) ||
+                        ((year === 2026 || year === 2025) && month === 2 && day <= 28)
+                    ) {
+                        period = '冬雪旺季';
+                        surcharge = isWeekend ? 900 : 600;
+                    }
+                    // 3. 春雪期（优先级第三）
+                    // 11月27日-12月10日
+                    else if (
+                        ((year === 2025 || year === 2024) && month === 11 && day >= 27) ||
+                        ((year === 2025 || year === 2024) && month === 12 && day <= 10)
+                    ) {
+                        period = '春雪期';
+                        surcharge = isWeekend ? 600 : 350;
+                    }
+                    // 3月1日-3月15日
+                    else if ((year === 2026 || year === 2025) && month === 3 && day >= 1 && day <= 15) {
+                        period = '春雪期';
+                        surcharge = isWeekend ? 600 : 350;
+                    }
+                    // 4. 初雪期（优先级第四）
+                    // 11月20日-11月26日
+                    else if ((year === 2025 || year === 2024) && month === 11 && day >= 20 && day <= 26) {
+                        period = '初雪期';
+                        surcharge = isWeekend ? 300 : 100;
+                    }
+                    // 3月16日-3月22日
+                    else if ((year === 2026 || year === 2025) && month === 3 && day >= 16 && day <= 22) {
+                        period = '初雪期';
+                        surcharge = isWeekend ? 300 : 100;
+                    }
+                    // 5. 普通日期（无加价）
+                    else {
+                        period = '普通日期';
+                        surcharge = 0;
+                    }
+
+                    return {
+                        date: dateStr,
+                        weekday,
+                        weekdayName,
+                        isWeekend,
+                        isHoliday,
+                        period,
+                        holidayName,
+                        surcharge
+                    };
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
 </html>
