@@ -254,41 +254,6 @@
                 </div>
             </div>
 
-            <div class="rules-section">
-                <h2>计价规则说明</h2>
-                <div class="rule-item">
-                    <strong>计算方式：</strong>例如12月1日入住，12月4日退房，实际住了3晚（1日、2日、3日晚上），4日退房不计费
-                </div>
-                <div class="rule-item">
-                    <strong>基础价格：</strong>1晚599元，2晚1198元，3晚1797元
-                </div>
-                <div class="rule-item">
-                    <strong>平日定义：</strong>周日、周一、周二、周三、周四入住
-                </div>
-                <div class="rule-item">
-                    <strong>周末定义：</strong>周五、周六入住
-                </div>
-                <div class="rule-item">
-                    <strong>初雪期：</strong>11月20日-11月26日、3月16日-3月22日
-                    <br>&nbsp;&nbsp;&nbsp;&nbsp;平日每晚+100元，周末每晚+300元
-                </div>
-                <div class="rule-item">
-                    <strong>春雪期：</strong>11月27日-12月10日、3月1日-3月15日
-                    <br>&nbsp;&nbsp;&nbsp;&nbsp;平日每晚+350元，周末每晚+600元
-                </div>
-                <div class="rule-item">
-                    <strong>冬雪旺季：</strong>12月11日-2月28日
-                    <br>&nbsp;&nbsp;&nbsp;&nbsp;平日每晚+600元，周末每晚+900元
-                </div>
-                <div class="rule-item">
-                    <strong>节假日：</strong>圣诞节（12/24-12/26）、元旦（12/31-1/2）、春节（2/17-2/23）
-                    <br>&nbsp;&nbsp;&nbsp;&nbsp;每晚+1200元
-                </div>
-                <div class="rule-item">
-                    <strong>计算优先级：</strong>节假日 > 冬雪旺季 > 春雪期 > 初雪期 > 普通日期
-                </div>
-            </div>
-
             <div v-if="error" class="error">
                 {{ error }}
             </div>
@@ -337,6 +302,43 @@
             <div v-else-if="checkinDate && checkoutDate && nights === 0" class="info">
                 入住和退房为同一天，无住宿费用
             </div>
+
+            <div class="rules-section">
+                <h2>计价规则说明</h2>
+                <div class="rule-item">
+                    <strong>计算方式：</strong>例如12月1日入住，12月4日退房，实际住了3晚（1日、2日、3日晚上），4日退房不计费
+                </div>
+                <div class="rule-item">
+                    <strong>基础价格：</strong>1晚599元，2晚1198元，3晚1797元
+                </div>
+                <div class="rule-item">
+                    <strong>平日定义：</strong>周日、周一、周二、周三、周四入住
+                </div>
+                <div class="rule-item">
+                    <strong>周末定义：</strong>周五、周六入住
+                </div>
+                <div class="rule-item">
+                    <strong>初雪期：</strong>11月20日-11月26日、3月16日-3月22日
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;平日每晚+100元，周末每晚+300元
+                </div>
+                <div class="rule-item">
+                    <strong>春雪期：</strong>11月27日-12月10日、3月1日-3月15日
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;平日每晚+350元，周末每晚+600元
+                </div>
+                <div class="rule-item">
+                    <strong>冬雪旺季：</strong>12月11日-2月28日
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;平日每晚+600元，周末每晚+900元
+                </div>
+                <div class="rule-item">
+                    <strong>节假日：</strong>圣诞节（12/24-12/26）、元旦（12/31-1/2）、春节（2/17-2/23）
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;每晚+1200元
+                </div>
+                <div class="rule-item">
+                    <strong>计算优先级：</strong>节假日 > 冬雪旺季 > 春雪期 > 初雪期 > 普通日期
+                </div>
+            </div>
+
+            
         </div>
     </div>
 
